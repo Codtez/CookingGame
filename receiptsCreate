@@ -1,0 +1,119 @@
+vFoodRec = -1;
+randomise();
+randint = irandom(8);
+pRec = 0;
+
+////Receipt Colors/Times
+priceMulti = 1;
+receiptLvl = 0;
+timeToRed = 5;
+timeToYellow = 8;
+
+
+///Draw Positions for Sprite/Cash
+recDrawX = self.x +105; //42
+recDrawY = self.y +45; //20
+recDrawMx = self.x +92;
+recDrawMy = self.y -5;
+///Draw Size of Items///
+drawW = 290; //231
+drawH = 222; //177
+
+//Color of Money Value
+MoneyClr = c_black;
+///////
+
+//////// Timers to Yellow and Red
+
+timer_Receipt_toYellow = time_source_create(time_source_game, timeToYellow, time_source_units_seconds, 
+	function()
+	{	if (instance_exists(self))
+		{
+			receiptLvl = 1;
+			image_index= receiptLvl;
+			time_source_start(timer_Receipt_toRed);
+			if (room == GAME)
+			{audio_play_sound(Scary,5,false)}
+		}
+	}, [], 1);
+
+timer_Receipt_toRed = time_source_create(time_source_game, timeToRed, time_source_units_seconds, 
+	function()
+	{	if (instance_exists(self))
+		{
+			receiptLvl = 2;
+			image_index= receiptLvl;
+			if (room == GAME)
+			{audio_play_sound(Scary,5,false)}
+		}
+		
+	}, [], 1);
+	
+	
+time_source_start(timer_Receipt_toYellow);
+
+
+
+
+///// Which FoodDisplay and Value?
+
+switch (randint)
+{
+	case 0:
+		pRec = pRecNoodles;
+		vFoodRec = vBaseFood;
+	break;
+	
+	case 1:
+		pRec = pRecBeef;
+		vFoodRec = vBeef;
+	break;
+	
+	case 2:
+		pRec = pRecChick;
+		vFoodRec = vChick;
+	break;
+
+	case 3:
+		pRec = pRecVeg;
+		vFoodRec = vVeg;
+	break;
+	
+	case 4:
+		pRec = pRecBeefChick;
+		vFoodRec = vBeefChick;
+	break;
+	
+	case 5:
+		pRec = pRecBeefVeg;
+		vFoodRec = vBeefVeg;
+	break;
+
+	case 6:
+		pRec = pRecChickVeg;
+		vFoodRec = vChickVeg;
+	break;
+	
+	case 7:
+		pRec = pRecBeefChickVeg;
+		vFoodRec = vBeefChickVeg;
+	break;
+	
+	case 8:
+		pRec = pRecRolls;
+		vFoodRec = vRolls;
+}
+
+
+//// Chef RollChance to Be Happy and Deploy Encouraging Word
+function ChefHappy(chance)
+{	
+	if (random(100)>chance)
+	{	
+		CHEF.ChefAnim(1,1);
+		instance_create_depth(224,418,10,WordsAnimationRec);
+		audio_play_sound(yay_6120,10,false);
+	}
+}
+
+
