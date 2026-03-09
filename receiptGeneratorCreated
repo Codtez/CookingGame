@@ -1,0 +1,18 @@
+/// Functions
+function genRec(xloc,yloc, count) //spawn receipt
+{
+	instance_create_layer(xloc,yloc,"Chef",Rec,{  RecNumber : count });
+}
+
+
+
+////////////////////////
+
+RecsCollected = 0;
+RecArray = [-1,-1,-1,-1]
+
+
+globalvar roundRatingSubtract;
+roundRatingSubtract = 0;
+globalvar roundRecs;
+roundRecs = 0;
