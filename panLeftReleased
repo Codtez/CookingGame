@@ -1,0 +1,174 @@
+/////////////////////// Raw Ingredients interact with Stove ////////////////////////////
+
+//////////START WITH NOODLES - END WITH SAUCE
+if (place_meeting(x,y,rawNoodlesDrop))
+{
+	if (Noodles_Pan == false)
+	{
+		audio_play_sound(Frying_Stove,1,false)
+		foodCounter = 0;
+		Noodles_Pan = true;
+		
+	}
+	else
+	{audio_play_sound(stop_13692,10,false)}
+}
+/////SauceDrop
+if (place_meeting(x,y,sauceBottleDrop))
+{
+	if (Noodles_Pan == true)
+	{
+		audio_play_sound(FIRE_Stove,1,false);
+		sprite_index = Stove_Burn_Anim;
+				
+		timer_Stove = time_source_create(time_source_game, 1.5, time_source_units_seconds, 
+		function()
+		{
+			sprite_index = Stove_Idle; ////Reset Stove to Idle Sprite
+			Noodles_Pan = false;   //// Reset all ingredient slots to empty
+			hasBeef = false;
+			hasChick = false;
+			hasVeg = false;
+			vPanDisplay = 0; //// Reset SubSprite of food in pan to empty sprite
+			
+			//Spawn Cooked Food and Reset FoodCounter
+			switch (foodCounter)
+			{
+				case vRolls:
+					array_push(CookedFoodArray.foodInventory,foodCounter)
+				break;
+				
+				case vBaseFood:
+					array_push(CookedFoodArray.foodInventory,foodCounter)
+				break;
+				
+				case vBeef:
+					array_push(CookedFoodArray.foodInventory,foodCounter)
+				break;
+				
+				case vChick:
+					array_push(CookedFoodArray.foodInventory,foodCounter)
+				break;
+				
+				case vVeg:
+					array_push(CookedFoodArray.foodInventory,foodCounter)
+				break;
+
+				case vBeefChick:
+					array_push(CookedFoodArray.foodInventory,foodCounter)
+				break;
+				
+				case vBeefVeg:
+					array_push(CookedFoodArray.foodInventory,foodCounter)
+				break;
+				
+				case vChickVeg:
+					array_push(CookedFoodArray.foodInventory,foodCounter)
+				break;
+				
+				case vBeefChickVeg:
+					array_push(CookedFoodArray.foodInventory,foodCounter)
+				break;
+					
+			}
+			
+			foodCounter = -1;
+
+		}, [], 1);
+		/////timer function^ timer start>
+		time_source_start(timer_Stove);
+		
+	}
+	else
+	{audio_play_sound(stop_13692,10,false)}
+}
+
+
+////////////////// Beef-Chick-Veg Drops
+
+if (place_meeting(x,y,rawBeefDrop))
+{
+	if (Noodles_Pan == true and hasBeef == false)
+	{
+		audio_play_sound(Frying_Stove,1,false)
+		foodCounter += vBeef; 
+		hasBeef = true;
+		
+	}
+	else
+	{audio_play_sound(stop_13692,10,false)}
+}
+
+if (place_meeting(x,y,rawChickenDrop))
+{
+	if (Noodles_Pan == true and hasChick == false)
+	{
+		audio_play_sound(Frying_Stove,1,false)
+		foodCounter += vChick; 
+		hasChick = true;
+		
+	}
+	else
+	{audio_play_sound(stop_13692,10,false)}
+}
+
+if (place_meeting(x,y,rawVegDrop))
+{
+	if (Noodles_Pan == true and hasVeg == false)
+	{
+		audio_play_sound(Frying_Stove,1,false)
+		foodCounter += vVeg; 
+		hasVeg = true;
+		
+	}
+	else
+	{audio_play_sound(stop_13692,10,false)}
+}
+
+
+
+////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+//////////// PAN FOOD to Cook Display which SubSprite
+
+switch (foodCounter)
+{	
+	default:
+		vPanDisplay = 0;
+	break;
+	
+	case vBaseFood:
+		vPanDisplay = 8;
+	break;
+	
+	case vBeef:
+		vPanDisplay = 1;
+	break;
+	
+	case vChick:
+        vPanDisplay = 2;
+    break;
+	
+	case vVeg:
+        vPanDisplay = 3;
+    break;
+
+    case vBeefChick:
+        vPanDisplay = 4;
+    break;
+	
+	case vBeefVeg:
+        vPanDisplay = 5;
+    break;
+	
+	case vBeefChickVeg:
+        vPanDisplay = 6;
+    break;
+
+	case vChickVeg:
+        vPanDisplay = 7;
+    break;
+	
+}
