@@ -1,0 +1,83 @@
+/// Receipt Lvl to Price Multi
+switch (receiptLvl)
+{	case 0:
+		priceMulti = 1;
+	break;
+		case 1:
+		priceMulti = .667;
+	break;
+	case 2:
+		priceMulti = .334;
+	break;
+	default:
+	break;
+}
+
+
+//// Click Receipts to Check for Food Items Array Matches
+///If Bad Match - Pop Array Item and Give Less Rating/Money
+///If No Match - Play Sound
+
+
+if (array_contains(CookedFoodArray.foodInventory,vFoodRec))
+{
+	aindex = array_get_index(CookedFoodArray.foodInventory,vFoodRec);
+
+	array_delete(CookedFoodArray.foodInventory,aindex,1);
+	audio_play_sound(ChaChing,10,false);
+
+	// Rec Counter and Score
+	roundRatingSubtract -= receiptLvl;
+	roundRecs += 1;
+	
+	//// Chef Happy Words Roll
+	if (receiptLvl = 0)
+	{
+		ChefHappy(1);
+		
+	}
+	
+	//// Money Animation Create
+	recMoney = round(priceMulti*pRec);
+	InGameMoney.gameMoney += recMoney;
+	GLOBALVARS.recToColors(receiptLvl);
+	
+	instance_create_layer(x,y,"Ingredients",MoneyAnimationRec);
+
+	///SelfDestruct
+	instance_destroy(self);
+	array_set(RecGenerator.RecArray, array_get_index(RecGenerator.RecArray,RecNumber),-1);
+}
+
+else if (array_length(CookedFoodArray.foodInventory) < 1)
+{
+	audio_play_sound(stop_13692,10,false);
+}
+else
+{	
+	CHEF.ChefAnim(2,1);
+
+	//// Pop Value from Food Array
+	foodID = array_pop(CookedFoodArray.foodInventory);
+	incorrectPrice = GLOBALVARS.foodIDtoPrice(foodID);
+	audio_play_sound(Oops,10,false);
+	
+	//// Money Animation Create
+	
+	recMoney = round(priceMulti*incorrectPrice/2);
+	InGameMoney.gameMoney += recMoney;
+	GLOBALVARS.recToColors(receiptLvl);
+	instance_create_layer(x,y,"Ingredients",MoneyAnimationRec);
+	
+	// Rec Counter and Score
+	roundRatingSubtract -= 2;
+	roundRecs += 1;
+	
+	///SelfDestruct
+	instance_destroy(self);
+	array_set(RecGenerator.RecArray, array_get_index(RecGenerator.RecArray,RecNumber),-1);
+	
+}
+
+
+//// Upon Matches - Create Instance of Money Evaporating with Correct Color 
