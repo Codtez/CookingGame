@@ -1,0 +1,12 @@
+////Randomly Generate Receipts Per Step
+if (PrintReceipts == true and array_contains(RecArray, -1))
+{
+	if (random(100) > 98.25)
+	{
+			RecsCollected += 1;	
+			array_set(RecArray, array_get_index(RecArray,-1),RecsCollected);
+			xpos = 400*array_get_index(RecArray,RecsCollected);
+			genRec(xpos,200,RecsCollected);
+			audio_play_sound(ReceiptCut,15,false);
+	}
+}
