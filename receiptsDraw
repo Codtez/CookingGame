@@ -1,0 +1,62 @@
+draw_self();
+
+switch (randint)
+{	
+	/////TESTING/////
+	case 100:
+		draw_text_transformed_color(self.x+40,self.y+50,"Noodles",2.5,2.5,2,c_black,c_black,c_black,c_black,1);
+		draw_sprite_stretched(Beef,0,self.x+40,self.y+25,235,180);
+		draw_text_transformed_color(self.x+50,self.y+120,"$" + string(pRec),4,4,2,c_green,c_green,c_green,c_green,1);
+		draw_sprite_stretched(beef41,0,self.x+40,self.y+25,100,77);
+		draw_sprite_stretched(noodle44,0,self.x+140,self.y+25,100,77);
+		draw_sprite_stretched(chicken43,0,self.x+40,self.y+80,100,77);
+		draw_sprite_stretched(vegetable46,0,self.x+140,self.y+80,100,77);
+	break;
+	////////////////
+	case 0:
+		draw_sprite_stretched(Noodle,0,recDrawX,recDrawY,drawW,drawH);
+		draw_text_transformed_color(recDrawMx,recDrawMy,"$" + string(pRec),4,4,2,MoneyClr,MoneyClr,MoneyClr,MoneyClr,1);
+	break;
+	
+	case 1:
+		draw_sprite_stretched(Beef,0,recDrawX,recDrawY,drawW,drawH);
+		draw_text_transformed_color(recDrawMx,recDrawMy,"$" + string(pRec),4,4,2,MoneyClr,MoneyClr,MoneyClr,MoneyClr,1);
+	break;
+	
+	case 2:
+		draw_sprite_stretched(Chicken,0,recDrawX,recDrawY,drawW,drawH);
+		draw_text_transformed_color(recDrawMx,recDrawMy,"$" + string(pRec),4,4,2,MoneyClr,MoneyClr,MoneyClr,MoneyClr,1);	
+	break;
+
+	case 3:
+		draw_sprite_stretched(Vegetable,0,recDrawX,recDrawY,drawW,drawH);
+		draw_text_transformed_color(recDrawMx,recDrawMy,"$" + string(pRec),4,4,2,MoneyClr,MoneyClr,MoneyClr,MoneyClr,1);
+	break;
+	
+	case 4:
+		draw_sprite_stretched(Beef_Chic,0,recDrawX,recDrawY,drawW,drawH);
+		draw_text_transformed_color(recDrawMx,recDrawMy,"$" + string(pRec),4,4,2,MoneyClr,MoneyClr,MoneyClr,MoneyClr,1);
+	break;
+	
+	case 5:
+		draw_sprite_stretched(Beef_Veg,0,recDrawX,recDrawY,drawW,drawH);
+		draw_text_transformed_color(recDrawMx,recDrawMy,"$" + string(pRec),4,4,2,MoneyClr,MoneyClr,MoneyClr,MoneyClr,1);	
+	break;
+
+	case 6:
+		draw_sprite_stretched(Chic_Veg,0,recDrawX,recDrawY,drawW,drawH);
+		draw_text_transformed_color(recDrawMx,recDrawMy,"$" + string(pRec),4,4,2,MoneyClr,MoneyClr,MoneyClr,MoneyClr,1);	
+	break;
+	
+	case 7:
+		draw_sprite_stretched(Beef_Chic_Veg,0,recDrawX,recDrawY,drawW,drawH);
+		draw_text_transformed_color(recDrawMx,recDrawMy,"$" + string(pRec),4,4,2,MoneyClr,MoneyClr,MoneyClr,MoneyClr,1);
+	break;
+	
+	case 8:
+		draw_sprite_stretched(cookedSpringRolls,0,recDrawX+8,recDrawY,drawW-17,drawH-13);
+		draw_text_transformed_color(recDrawMx,recDrawMy,"$" + string(pRec),4,4,2,MoneyClr,MoneyClr,MoneyClr,MoneyClr,1);
+	break;
+
+
+}
