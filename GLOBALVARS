@@ -1,0 +1,153 @@
+#macro RECBOARD_SLOTS 8
+#macro RATING_1 1.3
+#macro RATING_2 2.3
+#macro RATING_3 3
+
+/////////////////////////// Money/Rating
+globalvar totalMoney;
+
+globalvar recMoney;
+globalvar GloRecColor;
+globalvar GloRecAccent;
+
+totalMoney = 0;
+
+recMoney = 0;
+GloRecColor = c_black;
+GloRecAccent = c_black;
+
+globalvar HighScore;
+HighScore = 0;
+
+
+///////////////////////// FoodCounter Values
+globalvar vBaseFood;
+globalvar vBeef;
+globalvar vChick;
+globalvar vVeg;
+globalvar vBeefChick;
+globalvar vBeefVeg;
+globalvar vChickVeg;
+globalvar vBeefChickVeg;
+globalvar vRolls;
+
+vRolls = 100;
+vBaseFood = 0;
+
+vBeef = 1;
+vChick = 2;
+vVeg = 4;
+
+vBeefChick = vBeef + vChick + vBaseFood;
+vBeefVeg = vBeef + vVeg + vBaseFood;
+vChickVeg = vChick + vVeg + vBaseFood; 
+vBeefChickVeg = vBeef + vChick + vVeg + vBaseFood;
+
+///////////////////////////////// Receipts
+globalvar vRecGreen;
+globalvar vRecYellow;
+globalvar vRecRed;
+
+globalvar vRecFoodCount; 
+vRecFoodCount = -1;
+
+globalvar PrintReceipts;
+
+
+///Food Prices
+
+globalvar pRecRolls;
+
+globalvar pRecNoodles;
+globalvar pRecBeef;
+globalvar pRecChick;
+globalvar pRecVeg;
+
+globalvar pRecBeefChick;
+globalvar pRecBeefVeg;
+globalvar pRecChickVeg;
+globalvar pRecBeefChickVeg;
+
+pRecRolls = 10;
+
+pRecNoodles = 15;
+pRecBeef = 25;
+pRecChick = 25;
+pRecVeg = 25;
+
+pRecBeefChick = 35;
+pRecBeefVeg = 35;
+pRecChickVeg = 35;
+pRecBeefChickVeg = 45;
+
+
+
+//////////////////////// Pan Display
+globalvar vPanDisplay;
+vPanDisplay = 0;
+
+globalvar vPanDisplay2;
+vPanDisplay2 = 0; 
+
+//////////////////////// food id to price function
+
+function foodIDtoPrice(fID)
+{
+	switch(fID)
+	{
+		case vBaseFood:
+			return pRecNoodles
+		break;
+		case vBeef:
+			return pRecBeef
+		break;
+		case vChick:
+			return pRecChick
+		break;
+		case vVeg:
+			return pRecVeg
+		break;	
+		case vBeefChick:
+			return pRecBeefChick
+		break;
+		case vBeefVeg:
+			return pRecBeefVeg
+		break;
+		case vChickVeg:
+			return pRecChickVeg
+		break;
+		case vBeefChickVeg:
+			return pRecBeefChickVeg
+		break;
+		case vRolls:
+			return pRecRolls
+		break;
+		default:
+			return 0;
+		break;
+		
+	}
+}
+
+///// Reciept Value to Color Scheme
+function recToColors(Lvl)
+{
+	switch (Lvl)
+	{
+		case 0:
+			GloRecColor = c_green;
+			GloRecAccent = c_lime;
+		break;
+		
+		case 1:
+			GloRecColor = c_yellow;
+			GloRecAccent = c_orange;
+		break;
+		
+		case 2:
+			GloRecColor = c_red;
+			GloRecAccent = c_silver;
+		break;
+	}
+
+}
